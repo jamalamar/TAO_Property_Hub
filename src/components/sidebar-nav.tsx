@@ -17,14 +17,12 @@ export function SidebarNav() {
         <SidebarMenu>
           {mainNav.map((item) => (
             <SidebarMenuItem key={item.id}>
-              <Link href={item.href} legacyBehavior passHref>
-                <SidebarMenuButton asChild isActive={isActive(item.href)}>
-                  <a>
-                    <item.icon />
-                    <span>{item.name}</span>
-                  </a>
-                </SidebarMenuButton>
-              </Link>
+              <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                <Link href={item.href}>
+                  <item.icon />
+                  <span>{item.name}</span>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>
@@ -61,10 +59,8 @@ export function SidebarNav() {
                           <ul>
                             {properties.map((property: any) => (
                                <li key={property.id}>
-                                <Link href={`/property/${city.id}/${type.id}/${property.id}`} legacyBehavior passHref>
-                                  <a className={`block text-xs py-1 px-2 rounded-md hover:bg-sidebar-accent ${isActive(`/property/${city.id}/${type.id}/${property.id}`) ? 'bg-sidebar-accent' : ''}`}>
-                                    {property.name}
-                                  </a>
+                                <Link href={`/property/${city.id}/${type.id}/${property.id}`} className={`block text-xs py-1 px-2 rounded-md hover:bg-sidebar-accent ${isActive(`/property/${city.id}/${type.id}/${property.id}`) ? 'bg-sidebar-accent' : ''}`}>
+                                  {property.name}
                                 </Link>
                                </li>
                             ))}
@@ -99,10 +95,8 @@ export function SidebarNav() {
                            <ul className="space-y-1">
                             {module.subSections.map(sub => (
                                 <li key={sub.id}>
-                                <Link href={sub.href} legacyBehavior passHref>
-                                  <a className={`block text-xs py-1 px-2 rounded-md hover:bg-sidebar-accent ${isActive(sub.href) ? 'bg-sidebar-accent' : ''}`}>
-                                    {sub.name}
-                                  </a>
+                                <Link href={sub.href} className={`block text-xs py-1 px-2 rounded-md hover:bg-sidebar-accent ${isActive(sub.href) ? 'bg-sidebar-accent' : ''}`}>
+                                  {sub.name}
                                 </Link>
                                </li>
                             ))}
