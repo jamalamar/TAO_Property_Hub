@@ -8,10 +8,10 @@ export function PlaceholderView({ title }: { title: string }) {
                 <div className="mx-auto bg-muted p-3 rounded-full">
                    <Construction className="h-12 w-12 text-muted-foreground" />
                 </div>
-                <CardTitle className="mt-4">Page Under Construction</CardTitle>
+                <CardTitle className="mt-4">Página en Construcción</CardTitle>
             </CardHeader>
             <CardContent>
-                <p className="text-muted-foreground">The '{title}' page is not yet implemented. Please check back later.</p>
+                <p className="text-muted-foreground">La página '{title}' aún no está implementada. Por favor, vuelva más tarde.</p>
             </CardContent>
         </Card>
     )

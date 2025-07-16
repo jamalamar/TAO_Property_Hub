@@ -28,8 +28,8 @@ export function DocumentSummarizer() {
     event.preventDefault();
     if (!file) {
       toast({
-        title: 'No file selected',
-        description: 'Please select a document to summarize.',
+        title: 'No se ha seleccionado ningún archivo',
+        description: 'Por favor, seleccione un documento para resumir.',
         variant: 'destructive',
       });
       return;
@@ -46,10 +46,10 @@ export function DocumentSummarizer() {
         const result = await summarizeDocument({ documentDataUri });
         setSummary(result.summary);
       } catch (error) {
-        console.error('Summarization failed:', error);
+        console.error('La sumarización falló:', error);
         toast({
-          title: 'Summarization Failed',
-          description: 'An error occurred while summarizing the document.',
+          title: 'Falló la Sumarización',
+          description: 'Ocurrió un error al resumir el documento.',
           variant: 'destructive',
         });
       } finally {
@@ -58,8 +58,8 @@ export function DocumentSummarizer() {
     };
     reader.onerror = () => {
         toast({
-            title: 'File Read Error',
-            description: 'Could not read the selected file.',
+            title: 'Error al Leer el Archivo',
+            description: 'No se pudo leer el archivo seleccionado.',
             variant: 'destructive',
         });
         setIsLoading(false);
@@ -68,15 +68,15 @@ export function DocumentSummarizer() {
 
   return (
     <AdminViewWrapper
-        title="AI Document Summarizer"
-        description="Upload a legal document (e.g., PDF, DOCX) to generate a concise summary of its key details."
+        title="Sumarizador de Documentos con IA"
+        description="Sube un documento legal (p. ej., PDF, DOCX) para generar un resumen conciso de sus detalles clave."
     >
         <div className="space-y-6">
             <form onSubmit={handleSubmit} className="flex items-center gap-4">
             <Input type="file" onChange={handleFileChange} className="flex-1" />
             <Button type="submit" disabled={isLoading || !file}>
                 <FileUp className="mr-2 h-4 w-4" />
-                {isLoading ? 'Summarizing...' : 'Summarize'}
+                {isLoading ? 'Resumiendo...' : 'Resumir'}
             </Button>
             </form>
 
@@ -85,7 +85,7 @@ export function DocumentSummarizer() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <FileText />
-                        <span>Summary</span>
+                        <span>Resumen</span>
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
@@ -101,7 +101,7 @@ export function DocumentSummarizer() {
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                         <FileText />
-                        <span>Summary</span>
+                        <span>Resumen</span>
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

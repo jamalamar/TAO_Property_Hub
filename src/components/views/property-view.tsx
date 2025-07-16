@@ -16,10 +16,10 @@ export function PropertyView({ cityId, typeId, propertyId }: PropertyViewProps) 
         return (
             <Card>
                 <CardHeader>
-                    <CardTitle>Property Not Found</CardTitle>
+                    <CardTitle>Propiedad no Encontrada</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p>The requested property could not be found.</p>
+                    <p>La propiedad solicitada no pudo ser encontrada.</p>
                 </CardContent>
             </Card>
         )
@@ -46,22 +46,22 @@ export function PropertyView({ cityId, typeId, propertyId }: PropertyViewProps) 
                     <div className="p-4 bg-muted rounded-lg">
                         <Building className="mx-auto h-8 w-8 text-primary mb-2" />
                         <h3 className="text-lg font-semibold">{property.type}</h3>
-                        <p className="text-sm text-muted-foreground">Property Type</p>
+                        <p className="text-sm text-muted-foreground">Tipo de Propiedad</p>
                     </div>
                     <div className="p-4 bg-muted rounded-lg">
                         <DollarSign className="mx-auto h-8 w-8 text-primary mb-2" />
                         <h3 className="text-lg font-semibold">$1,200,000</h3>
-                        <p className="text-sm text-muted-foreground">Estimated Value</p>
+                        <p className="text-sm text-muted-foreground">Valor Estimado</p>
                     </div>
                      <div className="p-4 bg-muted rounded-lg">
                         <p className="text-3xl font-bold">95%</p>
-                        <p className="text-sm text-muted-foreground">Occupancy Rate</p>
+                        <p className="text-sm text-muted-foreground">Tasa de Ocupación</p>
                     </div>
                 </div>
                 <div>
-                    <h3 className="text-xl font-semibold mb-2">Description</h3>
+                    <h3 className="text-xl font-semibold mb-2">Descripción</h3>
                     <p className="text-muted-foreground">
-                        This is a placeholder description for {property.name}. It is a premier {property.type?.toLowerCase()} property located in the vibrant city of {property.city}. It features modern amenities and a strategic location, making it a valuable asset in our portfolio.
+                        Esta es una descripción de marcador de posición para {property.name}. Es una propiedad de primer nivel de tipo {property.type?.toLowerCase()} ubicada en la vibrante ciudad de {property.city}. Cuenta con comodidades modernas y una ubicación estratégica, lo que la convierte en un activo valioso en nuestra cartera.
                     </p>
                 </div>
             </CardContent>

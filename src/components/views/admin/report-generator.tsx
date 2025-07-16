@@ -30,8 +30,8 @@ export function ReportGenerator() {
     event.preventDefault();
     if (!files || files.length === 0) {
       toast({
-        title: 'No files selected',
-        description: 'Please select one or more documents to generate a report.',
+        title: 'No hay archivos seleccionados',
+        description: 'Por favor, seleccione uno o más documentos para generar un informe.',
         variant: 'destructive',
       });
       return;
@@ -59,10 +59,10 @@ export function ReportGenerator() {
         setResult(response);
 
     } catch (error) {
-        console.error('Report generation failed:', error);
+        console.error('La generación del informe falló:', error);
         toast({
-          title: 'Report Generation Failed',
-          description: 'An error occurred while generating the report.',
+          title: 'Falló la Generación del Informe',
+          description: 'Ocurrió un error al generar el informe.',
           variant: 'destructive',
         });
     } finally {
@@ -72,20 +72,20 @@ export function ReportGenerator() {
 
   return (
     <AdminViewWrapper
-        title="AI Report Generator"
-        description="Upload multiple documents and provide instructions to generate a cohesive report."
+        title="Generador de Informes con IA"
+        description="Sube múltiples documentos y proporciona instrucciones para generar un informe coherente."
     >
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-                <label htmlFor="files" className="text-sm font-medium">Documents</label>
+                <label htmlFor="files" className="text-sm font-medium">Documentos</label>
                 <Input id="files" type="file" multiple onChange={handleFileChange} />
             </div>
             
             <div className="space-y-2">
-                <label htmlFor="instructions" className="text-sm font-medium">Report Instructions (Optional)</label>
+                <label htmlFor="instructions" className="text-sm font-medium">Instrucciones del Informe (Opcional)</label>
                 <Textarea 
                     id="instructions"
-                    placeholder="e.g., 'Focus on payment terms and deadlines.'"
+                    placeholder="p. ej., 'Concéntrese en los plazos y condiciones de pago.'"
                     value={instructions}
                     onChange={(e) => setInstructions(e.target.value)}
                 />
@@ -93,18 +93,18 @@ export function ReportGenerator() {
             
             <Button type="submit" disabled={isLoading || !files}>
                 <FileUp className="mr-2 h-4 w-4" />
-                {isLoading ? 'Generating...' : 'Generate Report'}
+                {isLoading ? 'Generando...' : 'Generar Informe'}
             </Button>
         </form>
 
         {isLoading && (
         <div className="space-y-6 mt-6">
             <Card>
-                <CardHeader><CardTitle>Summary</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Resumen</CardTitle></CardHeader>
                 <CardContent className="space-y-2"><Skeleton className="h-4 w-full" /><Skeleton className="h-4 w-3/4" /></CardContent>
             </Card>
             <Card>
-                <CardHeader><CardTitle>Report</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Informe</CardTitle></CardHeader>
                 <CardContent className="space-y-2"><Skeleton className="h-4 w-full" /><Skeleton className="h-4 w-full" /><Skeleton className="h-4 w-5/6" /></CardContent>
             </Card>
         </div>
@@ -113,11 +113,11 @@ export function ReportGenerator() {
         {result && (
         <div className="space-y-6 mt-6">
             <Card>
-                <CardHeader><CardTitle>Summary</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Resumen</CardTitle></CardHeader>
                 <CardContent><p className="text-sm whitespace-pre-wrap font-body">{result.summary}</p></CardContent>
             </Card>
             <Card>
-                <CardHeader><CardTitle>Report</CardTitle></CardHeader>
+                <CardHeader><CardTitle>Informe</CardTitle></CardHeader>
                 <CardContent><p className="text-sm whitespace-pre-wrap font-body">{result.report}</p></CardContent>
             </Card>
         </div>

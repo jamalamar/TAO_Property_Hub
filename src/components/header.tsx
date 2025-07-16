@@ -9,14 +9,14 @@ import { usePathname } from 'next/navigation';
 import { adminModules, cities, getPropertyDetails, propertyTypes } from '@/lib/data';
 
 function generateBreadcrumbs(pathname: string) {
-    if (pathname === '/') return 'Total Assets';
+    if (pathname === '/') return 'Activos Totales';
 
     const pathParts = pathname.split('/').filter(p => p);
 
     if (pathParts[0] === 'property' && pathParts.length === 4) {
         const [_, cityId, typeId, propertyId] = pathParts;
         const details = getPropertyDetails(cityId, typeId, propertyId);
-        return details ? `${details.city} > ${details.type} > ${details.name}` : 'Property';
+        return details ? `${details.city} > ${details.type} > ${details.name}` : 'Propiedad';
     }
 
     if(pathParts[0] === 'admin' && pathParts.length === 3) {
@@ -27,7 +27,7 @@ function generateBreadcrumbs(pathname: string) {
     }
 
     if(pathParts[0] === 'assets-for-rent') {
-        return 'Assets for Rent';
+        return 'Activos en Renta';
     }
 
     // Capitalize and join
@@ -49,16 +49,16 @@ export function Header() {
       <div className="flex items-center gap-4">
         <Select value={role} onValueChange={setRole}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select Role" />
+            <SelectValue placeholder="Seleccionar Rol" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="socio-director">Socio Director</SelectItem>
-            <SelectItem value="invitado">Invitado (Guest)</SelectItem>
+            <SelectItem value="invitado">Invitado</SelectItem>
           </SelectContent>
         </Select>
         <Button variant="outline" size="icon" className="rounded-full">
           <UserCircle className="h-5 w-5" />
-          <span className="sr-only">Toggle user menu</span>
+          <span className="sr-only">Menú de usuario</span>
         </Button>
       </div>
     </header>

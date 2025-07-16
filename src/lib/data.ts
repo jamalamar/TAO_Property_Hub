@@ -1,22 +1,22 @@
 import { Building, Building2, Construction, Home, LayoutDashboard, Mountain, Gavel, Briefcase, Wrench } from 'lucide-react';
 
 export const mainNav = [
-  { id: 'total-assets', name: 'Total Assets', icon: LayoutDashboard, href: '/' },
-  { id: 'assets-for-rent', name: 'Assets for Rent', icon: Building, href: '/assets-for-rent' },
+  { id: 'total-assets', name: 'Activos Totales', icon: LayoutDashboard, href: '/' },
+  { id: 'assets-for-rent', name: 'Activos en Renta', icon: Building, href: '/assets-for-rent' },
 ];
 
 export const propertyTypes = [
-  { id: 'commercial', name: 'Commercial', icon: Building2 },
-  { id: 'apartments', name: 'Apartments', icon: Building },
-  { id: 'houses', name: 'Houses', icon: Home },
-  { id: 'land', name: 'Land', icon: Mountain },
-  { id: 'construction', name: 'Construction', icon: Construction },
+  { id: 'commercial', name: 'Comercial', icon: Building2 },
+  { id: 'apartments', name: 'Apartamentos', icon: Building },
+  { id: 'houses', name: 'Casas', icon: Home },
+  { id: 'land', name: 'Terrenos', icon: Mountain },
+  { id: 'construction', name: 'Construcción', icon: Construction },
 ];
 
 const properties = {
   acapulco: {
     commercial: [{ id: 'tienda-centro', name: 'Tienda Centro' }],
-    apartments: [{ id: 'vista-mar', name: 'Vista Mar Condos' }],
+    apartments: [{ id: 'vista-mar', name: 'Condominios Vista Mar' }],
     houses: [{ id: 'casa-playa', name: 'Casa Playa' }],
     land: [],
     construction: [],
@@ -46,7 +46,7 @@ const properties = {
 
 export const cities = [
   { id: 'acapulco', name: 'Acapulco', properties: properties.acapulco },
-  { id: 'cancun', name: 'Cancun', properties: properties.cancun },
+  { id: 'cancun', name: 'Cancún', properties: properties.cancun },
   { id: 'puerto-escondido', name: 'Puerto Escondido', properties: properties['puerto-escondido'] },
   { id: 'ciudad-del-carmen', name: 'Ciudad Del Carmen', properties: properties['ciudad-del-carmen'] },
 ];
@@ -57,27 +57,27 @@ export const adminModules = [
     name: 'Legal',
     icon: Gavel,
     subSections: [
-      { id: 'documents', name: 'Documents', href: '/admin/legal/documents' },
-      { id: 'contracts', name: 'Contracts', href: '/admin/legal/contracts' },
+      { id: 'documents', name: 'Documentos', href: '/admin/legal/documents' },
+      { id: 'contracts', name: 'Contratos', href: '/admin/legal/contracts' },
     ],
   },
   {
     id: 'administration',
-    name: 'Administration',
+    name: 'Administración',
     icon: Briefcase,
     subSections: [
-      { id: 'payments', name: 'Payments', href: '/admin/administration/payments' },
-      { id: 'services', name: 'Services', href: '/admin/administration/services' },
-      { id: 'taxes', name: 'Taxes', href: '/admin/administration/taxes' },
+      { id: 'payments', name: 'Pagos', href: '/admin/administration/payments' },
+      { id: 'services', name: 'Servicios', href: '/admin/administration/services' },
+      { id: 'taxes', name: 'Impuestos', href: '/admin/administration/taxes' },
     ],
   },
   {
     id: 'maintenance',
-    name: 'Maintenance',
+    name: 'Mantenimiento',
     icon: Wrench,
     subSections: [
-      { id: 'estimates', name: 'Estimates', href: '/admin/maintenance/estimates' },
-      { id: 'work-orders', name: 'Work Orders', href: '/admin/maintenance/work-orders' },
+      { id: 'estimates', name: 'Estimaciones', href: '/admin/maintenance/estimates' },
+      { id: 'work-orders', name: 'Órdenes de Trabajo', href: '/admin/maintenance/work-orders' },
     ],
   },
 ];

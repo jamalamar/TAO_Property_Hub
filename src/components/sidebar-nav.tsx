@@ -13,7 +13,7 @@ export function SidebarNav() {
   return (
     <>
       <SidebarGroup>
-        <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+        <SidebarGroupLabel>Navegación</SidebarGroupLabel>
         <SidebarMenu>
           {mainNav.map((item) => (
             <SidebarMenuItem key={item.id}>
@@ -33,7 +33,7 @@ export function SidebarNav() {
       <SidebarSeparator />
 
       <SidebarGroup>
-        <SidebarGroupLabel>Assets by City</SidebarGroupLabel>
+        <SidebarGroupLabel>Activos por Ciudad</SidebarGroupLabel>
         <Accordion type="multiple" className="w-full px-2">
           {cities.map((city) => (
             <AccordionItem value={city.id} key={city.id} className="border-none">
@@ -83,7 +83,7 @@ export function SidebarNav() {
       <SidebarSeparator />
       
       <SidebarGroup>
-        <SidebarGroupLabel>Admin Modules</SidebarGroupLabel>
+        <SidebarGroupLabel>Módulos de Administración</SidebarGroupLabel>
         <SidebarMenu>
           {adminModules.map((module) => (
             <SidebarMenuItem key={module.id}>

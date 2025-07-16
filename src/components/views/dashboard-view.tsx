@@ -3,11 +3,11 @@ import { DollarSign, Building, Home, Mountain, Construction } from "lucide-react
 import Image from "next/image";
 
 const stats = [
-    { title: "Total Value", value: "$12,345,678", icon: DollarSign },
-    { title: "Commercial", value: "12 Properties", icon: Building },
-    { title: "Houses", value: "25 Properties", icon: Home },
-    { title: "Land", value: "8 Lots", icon: Mountain },
-    { title: "In Construction", value: "3 Projects", icon: Construction },
+    { title: "Valor Total", value: "$12,345,678", icon: DollarSign },
+    { title: "Comercial", value: "12 Propiedades", icon: Building },
+    { title: "Casas", value: "25 Propiedades", icon: Home },
+    { title: "Terrenos", value: "8 Lotes", icon: Mountain },
+    { title: "En Construcción", value: "3 Proyectos", icon: Construction },
 ];
 
 export function DashboardView() {
@@ -29,13 +29,13 @@ export function DashboardView() {
             
             <Card>
                 <CardHeader>
-                    <CardTitle>Featured Property: Vista Mar Condos</CardTitle>
+                    <CardTitle>Propiedad Destacada: Condominios Vista Mar</CardTitle>
                 </CardHeader>
                 <CardContent className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                        <Image 
                          src="https://placehold.co/600x400.png"
-                         alt="Featured Property" 
+                         alt="Propiedad Destacada" 
                          width={600} 
                          height={400} 
                          className="rounded-lg object-cover"
@@ -44,13 +44,13 @@ export function DashboardView() {
                     </div>
                     <div className="space-y-4">
                         <p className="text-muted-foreground">
-                            Located in the heart of Acapulco, Vista Mar Condos offers breathtaking ocean views and luxurious amenities. This prime real estate asset represents a significant portion of our residential portfolio.
+                            Ubicado en el corazón de Acapulco, los Condominios Vista Mar ofrecen impresionantes vistas al mar y lujosas amenidades. Este activo inmobiliario de primera representa una porción significativa de nuestra cartera residencial.
                         </p>
                         <ul className="space-y-2 text-sm">
-                            <li className="flex items-center gap-2"><span className="font-semibold">Location:</span> Acapulco</li>
-                            <li className="flex items-center gap-2"><span className="font-semibold">Type:</span> Apartments</li>
-                            <li className="flex items-center gap-2"><span className="font-semibold">Units:</span> 48</li>
-                            <li className="flex items-center gap-2"><span className="font-semibold">Occupancy:</span> 95%</li>
+                            <li className="flex items-center gap-2"><span className="font-semibold">Ubicación:</span> Acapulco</li>
+                            <li className="flex items-center gap-2"><span className="font-semibold">Tipo:</span> Apartamentos</li>
+                            <li className="flex items-center gap-2"><span className="font-semibold">Unidades:</span> 48</li>
+                            <li className="flex items-center gap-2"><span className="font-semibold">Ocupación:</span> 95%</li>
                         </ul>
                     </div>
                 </CardContent>
