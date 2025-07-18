@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { UserCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { adminModules, cities, getPropertyDetails, propertyTypes } from '@/lib/data';
+import { adminModules, getPropertyDetails } from '@/lib/data';
 
 function generateBreadcrumbs(pathname: string) {
     if (pathname === '/') return 'Activos Totales';
@@ -19,11 +19,10 @@ function generateBreadcrumbs(pathname: string) {
         return details ? `${details.city} > ${details.type} > ${details.name}` : 'Propiedad';
     }
 
-    if(pathParts[0] === 'admin' && pathParts.length === 3) {
-        const [_, moduleId, subSectionId] = pathParts;
+    if(pathParts[0] === 'admin' && pathParts.length >= 2) {
+        const [_, moduleId] = pathParts;
         const module = adminModules.find(m => m.id === moduleId);
-        const subSection = module?.subSections.find(s => s.id === subSectionId);
-        return module && subSection ? `${module.name} > ${subSection.name}` : 'Admin';
+        return module ? `Admin > ${module.name}` : 'Admin';
     }
 
     if(pathParts[0] === 'assets-for-rent') {

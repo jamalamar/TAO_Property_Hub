@@ -83,27 +83,12 @@ export function SidebarNav() {
         <SidebarMenu>
           {adminModules.map((module) => (
             <SidebarMenuItem key={module.id}>
-                <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value={module.id} className="border-none">
-                        <AccordionTrigger className="hover:no-underline [&[data-state=open]>div>svg.chevron]:rotate-180">
-                           <div className="flex items-center gap-2 text-sm w-full">
-                             <module.icon />
-                             <span>{module.name}</span>
-                           </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="pl-8">
-                           <ul className="space-y-1">
-                            {module.subSections.map(sub => (
-                                <li key={sub.id}>
-                                <Link href={sub.href} className={`block text-xs py-1 px-2 rounded-md hover:bg-sidebar-accent ${isActive(sub.href) ? 'bg-sidebar-accent' : ''}`}>
-                                  {sub.name}
-                                </Link>
-                               </li>
-                            ))}
-                           </ul>
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
+               <SidebarMenuButton asChild isActive={isActive(module.href)}>
+                <Link href={module.href}>
+                  <module.icon />
+                  <span>{module.name}</span>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
         </SidebarMenu>

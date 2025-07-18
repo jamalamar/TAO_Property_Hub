@@ -56,30 +56,19 @@ export const adminModules = [
     id: 'legal',
     name: 'Legal',
     icon: Gavel,
-    subSections: [
-      { id: 'documents', name: 'Documentos', href: '/admin/legal/documents' },
-      { id: 'contracts', name: 'Contratos', href: '/admin/legal/contracts' },
-    ],
+    href: '/admin/legal'
   },
   {
     id: 'administration',
     name: 'Administración',
     icon: Briefcase,
-    subSections: [
-      { id: 'properties', name: 'Gestión de Propiedades', href: '/admin/administration/properties' },
-      { id: 'payments', name: 'Pagos', href: '/admin/administration/payments' },
-      { id: 'services', name: 'Servicios', href: '/admin/administration/services' },
-      { id: 'taxes', name: 'Impuestos', href: '/admin/administration/taxes' },
-    ],
+    href: '/admin/administration'
   },
   {
     id: 'maintenance',
     name: 'Mantenimiento',
     icon: Wrench,
-    subSections: [
-      { id: 'estimates', name: 'Estimaciones', href: '/admin/maintenance/estimates' },
-      { id: 'work-orders', name: 'Órdenes de Trabajo', href: '/admin/maintenance/work-orders' },
-    ],
+    href: '/admin/maintenance'
   },
 ];
 

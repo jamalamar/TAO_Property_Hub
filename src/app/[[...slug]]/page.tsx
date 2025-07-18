@@ -14,31 +14,26 @@ export default function Page({ params }: { params: { slug?: string[] } }) {
       return <DashboardView />;
     }
 
-    const [first, second, third, fourth] = slug;
+    const [first, second] = slug;
 
     if (first === 'assets-for-rent') {
         return <PlaceholderView title="Activos en Renta" />;
     }
 
     if (first === 'property' && slug.length === 4) {
-      return <PropertyView cityId={second} typeId={third} propertyId={fourth} />;
+      const [_, cityId, typeId, propertyId] = slug;
+      return <PropertyView cityId={cityId} typeId={typeId} propertyId={propertyId} />;
     }
     
     if (first === 'admin') {
       if (second === 'legal') {
-        if (third === 'documents') return <DocumentSummarizer />;
-        if (third === 'contracts') return <PlaceholderView title="Contratos" />;
+        return <DocumentSummarizer />;
       }
       if (second === 'administration') {
-         if (third === 'properties') return <PropertyManagement />;
-         if (third === 'payments') return <PlaceholderView title="Pagos" />;
-         if (third === 'services') return <PlaceholderView title="Servicios" />;
-         if (third === 'taxes') return <PlaceholderView title="Impuestos" />;
-         return <ReportGenerator />
+         return <PropertyManagement />;
       }
       if (second === 'maintenance') {
-        if (third === 'estimates') return <PlaceholderView title="Estimaciones" />;
-        if (third === 'work-orders') return <PlaceholderView title="Work Orders" />;
+        return <PlaceholderView title="Estimaciones" />;
       }
     }
 
