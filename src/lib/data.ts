@@ -1,4 +1,4 @@
-import { Building, Building2, Construction, Home, LayoutDashboard, Mountain, Gavel, Briefcase, Wrench } from 'lucide-react';
+import { Building, Building2, Construction, Home, LayoutDashboard, Mountain, Gavel, Briefcase, Wrench, Warehouse } from 'lucide-react';
 
 export const mainNav = [
   { id: 'total-assets', name: 'Activos Totales', icon: LayoutDashboard, href: '/' },
@@ -66,6 +66,7 @@ export const adminModules = [
     name: 'Administración',
     icon: Briefcase,
     subSections: [
+      { id: 'properties', name: 'Gestión de Propiedades', href: '/admin/administration/properties' },
       { id: 'payments', name: 'Pagos', href: '/admin/administration/payments' },
       { id: 'services', name: 'Servicios', href: '/admin/administration/services' },
       { id: 'taxes', name: 'Impuestos', href: '/admin/administration/taxes' },
@@ -97,4 +98,27 @@ export function getPropertyDetails(cityId: string, typeId: string, propertyId: s
         city: city.name,
         type: propertyTypes.find(pt => pt.id === typeId)?.name
     };
+}
+
+
+export function getAllProperties() {
+  const allProperties: any[] = [];
+  cities.forEach(city => {
+    Object.keys(city.properties).forEach(typeId => {
+      const typeProperties = (city.properties as any)[typeId];
+      if (typeProperties.length > 0) {
+        const typeName = propertyTypes.find(pt => pt.id === typeId)?.name;
+        typeProperties.forEach((prop: any) => {
+          allProperties.push({
+            ...prop,
+            city: city.name,
+            cityId: city.id,
+            type: typeName,
+            typeId: typeId,
+          });
+        });
+      }
+    });
+  });
+  return allProperties;
 }
