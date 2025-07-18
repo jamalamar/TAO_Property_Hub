@@ -4,11 +4,10 @@ import React, { useState } from 'react';
 import { summarizeDocument } from '@/ai/flows/summarize-document';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { FileUp, FileText } from 'lucide-react';
-import { AdminViewWrapper } from '../admin-view-wrapper';
 
 export function DocumentSummarizer() {
   const [file, setFile] = useState<File | null>(null);
@@ -67,49 +66,52 @@ export function DocumentSummarizer() {
   };
 
   return (
-    <AdminViewWrapper
-        title="Sumarizador de Documentos con IA"
-        description="Sube un documento legal (p. ej., PDF, DOCX) para generar un resumen conciso de sus detalles clave."
-    >
-        <div className="space-y-6">
-            <form onSubmit={handleSubmit} className="flex items-center gap-4">
-            <Input type="file" onChange={handleFileChange} className="flex-1" />
-            <Button type="submit" disabled={isLoading || !file}>
-                <FileUp className="mr-2 h-4 w-4" />
-                {isLoading ? 'Resumiendo...' : 'Resumir'}
-            </Button>
-            </form>
+    <Card>
+        <CardHeader>
+            <CardTitle>Sumarizador de Documentos con IA</CardTitle>
+            <CardDescription>Sube un documento legal (p. ej., PDF, DOCX) para generar un resumen conciso de sus detalles clave.</CardDescription>
+        </CardHeader>
+        <CardContent>
+            <div className="space-y-6">
+                <form onSubmit={handleSubmit} className="flex items-center gap-4">
+                <Input type="file" onChange={handleFileChange} className="flex-1" />
+                <Button type="submit" disabled={isLoading || !file}>
+                    <FileUp className="mr-2 h-4 w-4" />
+                    {isLoading ? 'Resumiendo...' : 'Resumir'}
+                </Button>
+                </form>
 
-            {isLoading && (
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <FileText />
-                        <span>Resumen</span>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-3/4" />
-                </CardContent>
-            </Card>
-            )}
+                {isLoading && (
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <FileText />
+                            <span>Resumen</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-full" />
+                        <Skeleton className="h-4 w-3/4" />
+                    </CardContent>
+                </Card>
+                )}
 
-            {summary && (
-            <Card>
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                        <FileText />
-                        <span>Resumen</span>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-sm whitespace-pre-wrap font-body">{summary}</p>
-                </CardContent>
-            </Card>
-            )}
-      </div>
-    </AdminViewWrapper>
+                {summary && (
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2">
+                            <FileText />
+                            <span>Resumen</span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-sm whitespace-pre-wrap font-body">{summary}</p>
+                    </CardContent>
+                </Card>
+                )}
+          </div>
+        </CardContent>
+    </Card>
   );
 }

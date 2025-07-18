@@ -2,9 +2,9 @@ import { AppLayout } from '@/components/app-layout';
 import { DashboardView } from '@/components/views/dashboard-view';
 import { PropertyView } from '@/components/views/property-view';
 import { PlaceholderView } from '@/components/views/placeholder-view';
-import { DocumentSummarizer } from '@/components/views/admin/document-summarizer';
-import { ReportGenerator } from '@/components/views/admin/report-generator';
+import { LegalView } from '@/components/views/admin/legal-view';
 import { PropertyManagement } from '@/components/views/admin/property-management';
+import { EstimatesView } from '@/components/views/admin/estimates-view';
 
 export default function Page({ params }: { params: { slug?: string[] } }) {
   const slug = params.slug || [];
@@ -27,13 +27,13 @@ export default function Page({ params }: { params: { slug?: string[] } }) {
     
     if (first === 'admin') {
       if (second === 'legal') {
-        return <DocumentSummarizer />;
+        return <LegalView />;
       }
       if (second === 'administration') {
          return <PropertyManagement />;
       }
       if (second === 'maintenance') {
-        return <PlaceholderView title="Estimaciones" />;
+        return <EstimatesView />;
       }
     }
 
