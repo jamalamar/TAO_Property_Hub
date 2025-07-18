@@ -15,32 +15,32 @@ export const propertyTypes = [
 
 const properties = {
   acapulco: {
-    commercial: [{ id: 'tienda-centro', name: 'Tienda Centro' }],
-    apartments: [{ id: 'vista-mar', name: 'Condominios Vista Mar' }],
-    houses: [{ id: 'casa-playa', name: 'Casa Playa' }],
+    commercial: [{ id: 'tienda-centro', name: 'Tienda Centro', owner: 'Inversiones Sol S.A.', cost: 1500000, tenant: 'Super Ahorro', size: '500 m²' }],
+    apartments: [{ id: 'vista-mar', name: 'Condominios Vista Mar', owner: 'Desarrollos Marinos', cost: 3200000, tenant: 'Múltiples', size: '12 unidades' }],
+    houses: [{ id: 'casa-playa', name: 'Casa Playa', owner: 'Familia Pérez', cost: 850000, tenant: null, size: '300 m²' }],
     land: [],
     construction: [],
   },
   cancun: {
-    commercial: [{ id: 'plaza-sol', name: 'Plaza Sol' }],
-    apartments: [{ id: 'laguna-suites', name: 'Laguna Suites' }],
+    commercial: [{ id: 'plaza-sol', name: 'Plaza Sol', owner: 'Grupo Comercial del Sureste', cost: 5500000, tenant: 'Múltiples', size: '25 locales' }],
+    apartments: [{ id: 'laguna-suites', name: 'Laguna Suites', owner: 'Desarrollos Marinos', cost: 4100000, tenant: 'Múltiples', size: '20 suites' }],
     houses: [],
-    land: [{ id: 'terreno-hotelero', name: 'Terreno Hotelero' }],
+    land: [{ id: 'terreno-hotelero', name: 'Terreno Hotelero', owner: 'Inversiones TAO', cost: 2300000, tenant: null, size: '2 hectáreas' }],
     construction: [],
   },
   'puerto-escondido': {
     commercial: [],
     apartments: [],
-    houses: [{ id: 'villa-zicatela', name: 'Villa Zicatela' }],
-    land: [{ id: 'lote-comercial', name: 'Lote Comercial' }],
+    houses: [{ id: 'villa-zicatela', name: 'Villa Zicatela', owner: 'Familia López', cost: 1200000, tenant: 'Renta Vacacional', size: '450 m²' }],
+    land: [{ id: 'lote-comercial', name: 'Lote Comercial', owner: 'Inversiones TAO', cost: 600000, tenant: null, size: '1000 m²' }],
     construction: [],
   },
   'ciudad-del-carmen': {
-    commercial: [{ id: 'oficinas-puerto', name: 'Oficinas del Puerto' }],
-    apartments: [{ id: 'residencial-isla', name: 'Residencial la Isla' }],
+    commercial: [{ id: 'oficinas-puerto', name: 'Oficinas del Puerto', owner: 'Servicios Portuarios Integrados', cost: 2800000, tenant: 'PEMEX', size: '1200 m²' }],
+    apartments: [{ id: 'residencial-isla', name: 'Residencial la Isla', owner: 'Constructora del Golfo', cost: 3500000, tenant: 'Múltiples', size: '15 departamentos' }],
     houses: [],
     land: [],
-    construction: [{ id: 'nuevo-proyecto', name: 'Nuevo Proyecto Residencial' }],
+    construction: [{ id: 'nuevo-proyecto', name: 'Nuevo Proyecto Residencial', owner: 'Constructora del Golfo', cost: 6000000, tenant: 'N/A', size: 'En desarrollo' }],
   },
 };
 

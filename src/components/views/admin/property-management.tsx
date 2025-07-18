@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { AdminViewWrapper } from '../admin-view-wrapper';
 import { Button } from '@/components/ui/button';
@@ -19,16 +19,35 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { getAllProperties, cities, propertyTypes } from '@/lib/data';
-import { PlusCircle, Edit, Trash2, MapPin } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, MapPin, User, DollarSign, UserCheck, Ruler } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
 export function PropertyManagement() {
   const { toast } = useToast();
-  const [properties, setProperties] = useState(getAllProperties());
+  const allProperties = useMemo(() => getAllProperties(), []);
+  const [properties, setProperties] = useState(allProperties);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProperty, setEditingProperty] = useState<any>(null);
+
+  // State for filters
+  const [cityFilter, setCityFilter] = useState('all');
+  const [typeFilter, setTypeFilter] = useState('all');
+  const [searchFilter, setSearchFilter] = useState('');
+
+  const filteredProperties = useMemo(() => {
+    return allProperties.filter(prop => {
+        const matchesCity = cityFilter === 'all' || prop.cityId === cityFilter;
+        const matchesType = typeFilter === 'all' || prop.typeId === typeFilter;
+        const matchesSearch = !searchFilter || 
+            prop.name.toLowerCase().includes(searchFilter.toLowerCase()) ||
+            prop.owner.toLowerCase().includes(searchFilter.toLowerCase()) ||
+            (prop.tenant && prop.tenant.toLowerCase().includes(searchFilter.toLowerCase()));
+        return matchesCity && matchesType && matchesSearch;
+    });
+  }, [allProperties, cityFilter, typeFilter, searchFilter]);
+
 
   const openAddDialog = () => {
     setEditingProperty(null);
@@ -41,7 +60,6 @@ export function PropertyManagement() {
   };
   
   const handleDelete = (propertyId: string) => {
-    // Placeholder for delete functionality
     console.log("Deleting property:", propertyId);
     toast({
         title: "Funcionalidad no implementada",
@@ -55,7 +73,6 @@ export function PropertyManagement() {
     const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData.entries());
     
-    // This is a placeholder. In a real app, you would have an API call here.
     if (editingProperty) {
         console.log("Updating property:", { ...editingProperty, ...data });
         toast({
@@ -70,17 +87,45 @@ export function PropertyManagement() {
         });
     }
 
-    // In a real scenario, you'd refetch or update state here.
-    // For now, we'll just close the dialog.
     setIsDialogOpen(false);
   };
 
   return (
     <AdminViewWrapper
       title="Gestión de Propiedades"
-      description="Agrega, edita o elimina propiedades de tu portafolio."
+      description="Filtra, agrega, edita o elimina propiedades de tu portafolio."
     >
       <div className="space-y-6">
+        <Card>
+            <CardContent className="pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Input 
+                        placeholder="Buscar por nombre, propietario..."
+                        value={searchFilter}
+                        onChange={(e) => setSearchFilter(e.target.value)}
+                    />
+                    <Select value={cityFilter} onValueChange={setCityFilter}>
+                        <SelectTrigger><SelectValue placeholder="Filtrar por ciudad" /></SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">Todas las ciudades</SelectItem>
+                            {cities.map(city => (
+                                <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <Select value={typeFilter} onValueChange={setTypeFilter}>
+                        <SelectTrigger><SelectValue placeholder="Filtrar por tipo" /></SelectTrigger>
+                        <SelectContent>
+                             <SelectItem value="all">Todos los tipos</SelectItem>
+                            {propertyTypes.map(type => (
+                                <SelectItem key={type.id} value={type.id}>{type.name}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            </CardContent>
+        </Card>
+
         <div className="flex justify-end">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
@@ -89,7 +134,7 @@ export function PropertyManagement() {
                 Agregar Propiedad
               </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-md">
               <form onSubmit={handleFormSubmit}>
                 <DialogHeader>
                   <DialogTitle>{editingProperty ? 'Editar Propiedad' : 'Agregar Nueva Propiedad'}</DialogTitle>
@@ -100,11 +145,11 @@ export function PropertyManagement() {
                 <div className="grid gap-4 py-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nombre</Label>
-                    <Input id="name" name="name" defaultValue={editingProperty?.name} placeholder="Ej. Condominos Vista Mar" />
+                    <Input id="name" name="name" defaultValue={editingProperty?.name} placeholder="Ej. Condominios Vista Mar" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="cityId">Ciudad</Label>
-                     <Select name="cityId" defaultValue={editingProperty?.cityId}>
+                     <Select name="cityId" defaultValue={editingProperty?.cityId} required>
                         <SelectTrigger><SelectValue placeholder="Selecciona una ciudad" /></SelectTrigger>
                         <SelectContent>
                             {cities.map(city => (
@@ -115,7 +160,7 @@ export function PropertyManagement() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="typeId">Tipo</Label>
-                     <Select name="typeId" defaultValue={editingProperty?.typeId}>
+                     <Select name="typeId" defaultValue={editingProperty?.typeId} required>
                         <SelectTrigger><SelectValue placeholder="Selecciona un tipo" /></SelectTrigger>
                         <SelectContent>
                             {propertyTypes.map(type => (
@@ -123,6 +168,14 @@ export function PropertyManagement() {
                             ))}
                         </SelectContent>
                     </Select>
+                  </div>
+                   <div className="space-y-2">
+                    <Label htmlFor="owner">Propietario</Label>
+                    <Input id="owner" name="owner" defaultValue={editingProperty?.owner} placeholder="Ej. Inversiones TAO" required />
+                  </div>
+                   <div className="space-y-2">
+                    <Label htmlFor="cost">Costo</Label>
+                    <Input id="cost" name="cost" type="number" defaultValue={editingProperty?.cost} placeholder="Ej. 2500000" required />
                   </div>
                 </div>
                 <DialogFooter>
@@ -137,7 +190,7 @@ export function PropertyManagement() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.map((prop) => (
+            {filteredProperties.map((prop) => (
                 <Card key={prop.id} className="flex flex-col">
                     <CardHeader className="p-0 relative">
                         <Image
@@ -148,13 +201,16 @@ export function PropertyManagement() {
                           className="object-cover w-full h-48 rounded-t-lg"
                           data-ai-hint={`${prop.type} exterior`}
                         />
+                        <Badge variant="secondary" className="absolute top-2 right-2">{prop.type}</Badge>
                     </CardHeader>
-                    <CardContent className="p-4 flex-grow">
-                        <Badge variant="secondary" className="mb-2">{prop.type}</Badge>
-                        <CardTitle className="text-lg mb-1">{prop.name}</CardTitle>
-                        <div className="flex items-center text-sm text-muted-foreground">
-                            <MapPin className="w-4 h-4 mr-1.5" />
-                            <span>{prop.city}</span>
+                    <CardContent className="p-4 flex-grow space-y-3">
+                        <CardTitle className="text-lg">{prop.name}</CardTitle>
+                        <div className="text-sm text-muted-foreground space-y-2">
+                            <div className="flex items-center"><MapPin className="w-4 h-4 mr-2" /> {prop.city}</div>
+                            <div className="flex items-center"><User className="w-4 h-4 mr-2" /> {prop.owner}</div>
+                            <div className="flex items-center"><DollarSign className="w-4 h-4 mr-2" /> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(prop.cost)}</div>
+                            <div className="flex items-center"><Ruler className="w-4 h-4 mr-2" /> {prop.size}</div>
+                            {prop.tenant && <div className="flex items-center"><UserCheck className="w-4 h-4 mr-2" /> {prop.tenant}</div>}
                         </div>
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex justify-end gap-2">
@@ -169,6 +225,11 @@ export function PropertyManagement() {
                     </CardFooter>
                 </Card>
             ))}
+            {filteredProperties.length === 0 && (
+                <div className="col-span-full text-center py-10 text-muted-foreground">
+                    No se encontraron propiedades que coincidan con los filtros.
+                </div>
+            )}
         </div>
       </div>
     </AdminViewWrapper>
