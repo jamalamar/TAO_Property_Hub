@@ -19,28 +19,31 @@ export function SidebarNav({ role }: { role: string }) {
 
   const isSocioOrInvitado = role === 'socio-director' || role === 'invitado';
   const isSocioOrAdmin = role === 'socio-director' || role === 'admin';
+  const isInvitado = role === 'invitado';
 
   return (
     <>
       {isSocioOrInvitado && (
         <>
-          <SidebarGroup>
-            <SidebarGroupLabel>Navegación</SidebarGroupLabel>
-            <SidebarMenu>
-              {mainNav.map((item) => (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton asChild isActive={isActive(item.href)}>
-                    <Link href={createHrefWithRole(item.href)}>
-                      <item.icon />
-                      <span>{item.name}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroup>
+          {!isInvitado && (
+            <SidebarGroup>
+              <SidebarGroupLabel>Navegación</SidebarGroupLabel>
+              <SidebarMenu>
+                {mainNav.map((item) => (
+                  <SidebarMenuItem key={item.id}>
+                    <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                      <Link href={createHrefWithRole(item.href)}>
+                        <item.icon />
+                        <span>{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
+          )}
 
-          <SidebarSeparator />
+          {!isInvitado && <SidebarSeparator />}
 
           <SidebarGroup>
             <SidebarGroupLabel>Activos por Ciudad</SidebarGroupLabel>

@@ -6,6 +6,7 @@ import { LegalView } from '@/components/views/admin/legal-view';
 import { PropertyManagement } from '@/components/views/admin/property-management';
 import { EstimatesView } from '@/components/views/admin/estimates-view';
 import { redirect } from 'next/navigation';
+import { CatalogView } from '@/components/views/catalog-view';
 
 export default function Page({ params, searchParams }: { params: { slug?: string[] }, searchParams: { role?: string } }) {
   const slug = params.slug || [];
@@ -17,6 +18,9 @@ export default function Page({ params, searchParams }: { params: { slug?: string
 
   const renderContent = () => {
     if (slug.length === 0) {
+      if (role === 'invitado') {
+        return <CatalogView />;
+      }
       return <DashboardView />;
     }
 
@@ -43,6 +47,9 @@ export default function Page({ params, searchParams }: { params: { slug?: string
       }
     }
 
+    if (role === 'invitado') {
+        return <CatalogView />;
+    }
     return <DashboardView />;
   };
 
