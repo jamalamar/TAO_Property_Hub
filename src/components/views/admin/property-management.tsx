@@ -1,16 +1,10 @@
+
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { AdminViewWrapper } from '../admin-view-wrapper';
 import { Button } from '@/components/ui/button';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
 import {
   Dialog,
   DialogContent,
@@ -25,9 +19,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { getAllProperties, cities, propertyTypes } from '@/lib/data';
-import { PlusCircle, Edit, Trash2 } from 'lucide-react';
+import { PlusCircle, Edit, Trash2, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 export function PropertyManagement() {
   const { toast } = useToast();
@@ -103,20 +98,14 @@ export function PropertyManagement() {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="name" className="text-right">
-                      Nombre
-                    </Label>
-                    <Input id="name" name="name" defaultValue={editingProperty?.name} className="col-span-3" />
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Nombre</Label>
+                    <Input id="name" name="name" defaultValue={editingProperty?.name} placeholder="Ej. Condominos Vista Mar" />
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="cityId" className="text-right">
-                      Ciudad
-                    </Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="cityId">Ciudad</Label>
                      <Select name="cityId" defaultValue={editingProperty?.cityId}>
-                        <SelectTrigger className="col-span-3">
-                            <SelectValue placeholder="Selecciona una ciudad" />
-                        </SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder="Selecciona una ciudad" /></SelectTrigger>
                         <SelectContent>
                             {cities.map(city => (
                                 <SelectItem key={city.id} value={city.id}>{city.name}</SelectItem>
@@ -124,14 +113,10 @@ export function PropertyManagement() {
                         </SelectContent>
                     </Select>
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="typeId" className="text-right">
-                      Tipo
-                    </Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="typeId">Tipo</Label>
                      <Select name="typeId" defaultValue={editingProperty?.typeId}>
-                        <SelectTrigger className="col-span-3">
-                            <SelectValue placeholder="Selecciona un tipo" />
-                        </SelectTrigger>
+                        <SelectTrigger><SelectValue placeholder="Selecciona un tipo" /></SelectTrigger>
                         <SelectContent>
                             {propertyTypes.map(type => (
                                 <SelectItem key={type.id} value={type.id}>{type.name}</SelectItem>
@@ -151,38 +136,40 @@ export function PropertyManagement() {
           </Dialog>
         </div>
 
-        <Card>
-            <CardContent className="mt-6">
-                <Table>
-                <TableHeader>
-                    <TableRow>
-                    <TableHead>Nombre</TableHead>
-                    <TableHead>Ciudad</TableHead>
-                    <TableHead>Tipo</TableHead>
-                    <TableHead className="text-right">Acciones</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {properties.map((prop) => (
-                    <TableRow key={prop.id}>
-                        <TableCell className="font-medium">{prop.name}</TableCell>
-                        <TableCell>{prop.city}</TableCell>
-                        <TableCell>{prop.type}</TableCell>
-                        <TableCell className="text-right space-x-2">
-                            <Button variant="ghost" size="icon" onClick={() => openEditDialog(prop)}>
-                                <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon" onClick={() => handleDelete(prop.id)}>
-                                <Trash2 className="h-4 w-4 text-destructive" />
-                            </Button>
-                        </TableCell>
-                    </TableRow>
-                    ))}
-                </TableBody>
-                </Table>
-            </CardContent>
-        </Card>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((prop) => (
+                <Card key={prop.id} className="flex flex-col">
+                    <CardHeader className="p-0 relative">
+                        <Image
+                          src={`https://placehold.co/600x400.png`}
+                          alt={prop.name}
+                          width={600}
+                          height={400}
+                          className="object-cover w-full h-48 rounded-t-lg"
+                          data-ai-hint={`${prop.type} exterior`}
+                        />
+                    </CardHeader>
+                    <CardContent className="p-4 flex-grow">
+                        <Badge variant="secondary" className="mb-2">{prop.type}</Badge>
+                        <CardTitle className="text-lg mb-1">{prop.name}</CardTitle>
+                        <div className="flex items-center text-sm text-muted-foreground">
+                            <MapPin className="w-4 h-4 mr-1.5" />
+                            <span>{prop.city}</span>
+                        </div>
+                    </CardContent>
+                    <CardFooter className="p-4 pt-0 flex justify-end gap-2">
+                        <Button variant="outline" size="sm" onClick={() => openEditDialog(prop)}>
+                            <Edit className="mr-2 h-4 w-4" />
+                            Editar
+                        </Button>
+                        <Button variant="destructive" size="sm" onClick={() => handleDelete(prop.id)}>
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Eliminar
+                        </Button>
+                    </CardFooter>
+                </Card>
+            ))}
+        </div>
       </div>
     </AdminViewWrapper>
   );
