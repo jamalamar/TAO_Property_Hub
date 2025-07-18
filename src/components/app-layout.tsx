@@ -14,6 +14,8 @@ import { Header } from './header';
 import Image from 'next/image';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
+  const [role, setRole] = React.useState('socio-director');
+
   return (
     <SidebarProvider>
       <Sidebar variant="inset" collapsible="icon">
@@ -26,14 +28,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </SidebarHeader>
         <SidebarContent>
-          <SidebarNav />
+          <SidebarNav role={role} />
         </SidebarContent>
         <SidebarFooter>
           {/* Footer content if any */}
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <Header />
+        <Header role={role} onRoleChange={setRole} />
         <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>

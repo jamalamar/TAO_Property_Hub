@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarSeparator, SidebarGroup, SidebarGroupLabel } from '@/components/ui/sidebar';
 import { MapPin } from 'lucide-react';
 
-export function SidebarNav() {
+export function SidebarNav({ role }: { role: string }) {
   const { isActive } = useNavigation();
 
   return (
@@ -76,23 +76,27 @@ export function SidebarNav() {
         </Accordion>
       </SidebarGroup>
 
-      <SidebarSeparator />
-      
-      <SidebarGroup>
-        <SidebarGroupLabel>Módulos de Administración</SidebarGroupLabel>
-        <SidebarMenu>
-          {adminModules.map((module) => (
-            <SidebarMenuItem key={module.id}>
-               <SidebarMenuButton asChild isActive={isActive(module.href)}>
-                <Link href={module.href}>
-                  <module.icon />
-                  <span>{module.name}</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarGroup>
+      {role === 'socio-director' && (
+        <>
+          <SidebarSeparator />
+          
+          <SidebarGroup>
+            <SidebarGroupLabel>Módulos de Administración</SidebarGroupLabel>
+            <SidebarMenu>
+              {adminModules.map((module) => (
+                <SidebarMenuItem key={module.id}>
+                  <SidebarMenuButton asChild isActive={isActive(module.href)}>
+                    <Link href={module.href}>
+                      <module.icon />
+                      <span>{module.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroup>
+        </>
+      )}
     </>
   );
 }

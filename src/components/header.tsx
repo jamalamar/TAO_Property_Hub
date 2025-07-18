@@ -34,8 +34,7 @@ function generateBreadcrumbs(pathname: string) {
 }
 
 
-export function Header() {
-  const [role, setRole] = React.useState('socio-director');
+export function Header({ role, onRoleChange }: { role: string; onRoleChange: (role: string) => void; }) {
   const pathname = usePathname();
   const breadcrumb = generateBreadcrumbs(pathname);
 
@@ -46,7 +45,7 @@ export function Header() {
         <h1 className="text-lg font-semibold">{breadcrumb}</h1>
       </div>
       <div className="flex items-center gap-4">
-        <Select value={role} onValueChange={setRole}>
+        <Select value={role} onValueChange={onRoleChange}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Seleccionar Rol" />
           </SelectTrigger>
