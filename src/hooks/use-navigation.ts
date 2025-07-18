@@ -1,9 +1,10 @@
 "use client";
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 export function useNavigation() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -11,9 +12,14 @@ export function useNavigation() {
     }
     return pathname.startsWith(href);
   };
+  
+  const getRole = () => {
+    return searchParams.get('role');
+  }
 
   return {
     pathname,
     isActive,
+    getRole,
   };
 }

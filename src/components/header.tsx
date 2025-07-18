@@ -51,6 +51,7 @@ export function Header({ role, onRoleChange }: { role: string; onRoleChange: (ro
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="socio-director">Socio Director</SelectItem>
+            <SelectItem value="admin">Admin</SelectItem>
             <SelectItem value="invitado">Invitado</SelectItem>
           </SelectContent>
         </Select>

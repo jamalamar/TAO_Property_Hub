@@ -5,9 +5,15 @@ import { PlaceholderView } from '@/components/views/placeholder-view';
 import { LegalView } from '@/components/views/admin/legal-view';
 import { PropertyManagement } from '@/components/views/admin/property-management';
 import { EstimatesView } from '@/components/views/admin/estimates-view';
+import { redirect } from 'next/navigation';
 
-export default function Page({ params }: { params: { slug?: string[] } }) {
+export default function Page({ params, searchParams }: { params: { slug?: string[] }, searchParams: { role?: string } }) {
   const slug = params.slug || [];
+  const role = searchParams.role;
+
+  if (role === 'admin' && slug.length === 0) {
+    redirect('/admin/administration?role=admin');
+  }
 
   const renderContent = () => {
     if (slug.length === 0) {

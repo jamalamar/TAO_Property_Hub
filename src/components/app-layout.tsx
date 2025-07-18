@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -14,7 +15,24 @@ import { Header } from './header';
 import Image from 'next/image';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
-  const [role, setRole] = React.useState('socio-director');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentRole = searchParams.get('role') || 'socio-director';
+
+  const handleRoleChange = (newRole: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('role', newRole);
+    
+    let newPath = pathname;
+    if (newRole === 'admin' && !pathname.startsWith('/admin')) {
+      newPath = '/admin/administration';
+    } else if (newRole !== 'admin' && pathname.startsWith('/admin')) {
+      newPath = '/';
+    }
+
+    router.push(`${newPath}?${params.toString()}`);
+  };
 
   return (
     <SidebarProvider>
@@ -28,14 +46,14 @@ export function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </SidebarHeader>
         <SidebarContent>
-          <SidebarNav role={role} />
+          <SidebarNav role={currentRole} />
         </SidebarContent>
         <SidebarFooter>
           {/* Footer content if any */}
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <Header role={role} onRoleChange={setRole} />
+        <Header role={currentRole} onRoleChange={handleRoleChange} />
         <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>
