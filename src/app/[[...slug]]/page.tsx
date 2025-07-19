@@ -7,6 +7,7 @@ import { CatalogView } from '@/components/views/catalog-view';
 import { LegalView } from '@/components/views/admin/legal-view';
 import { PropertyManagement } from '@/components/views/admin/property-management';
 import { MaintenanceView } from '@/components/views/admin/maintenance-view';
+import { AssetsForRentView } from '@/components/views/assets-for-rent-view';
 
 export default function Page({ params, searchParams }: { params: { slug?: string[] }, searchParams: { role?: string } }) {
   const slug = params.slug || [];
@@ -27,7 +28,7 @@ export default function Page({ params, searchParams }: { params: { slug?: string
     const [first, second] = slug;
 
     if (first === 'assets-for-rent') {
-        return <PlaceholderView title="Activos en Renta" />;
+        return <AssetsForRentView />;
     }
 
     if (first === 'property' && slug.length === 4) {
