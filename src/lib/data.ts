@@ -111,3 +111,58 @@ export function getAllProperties() {
   });
   return allProperties;
 }
+
+export const maintenanceStatuses = [
+  { id: 'pending', name: 'Pendiente', color: 'bg-yellow-500' },
+  { id: 'in_progress', name: 'En Progreso', color: 'bg-blue-500' },
+  { id: 'completed', name: 'Completado', color: 'bg-green-500' },
+  { id: 'cancelled', name: 'Cancelado', color: 'bg-red-500' },
+];
+
+export const maintenanceRequests = [
+    { 
+        id: 'REQ-001', 
+        propertyId: 'vista-mar',
+        propertyName: 'Condominios Vista Mar', 
+        description: 'Fuga de agua en el baño principal del departamento 5B.',
+        status: 'pending',
+        reportedDate: '2024-07-28',
+        assignedTo: 'Plomería Express'
+    },
+    { 
+        id: 'REQ-002', 
+        propertyId: 'plaza-sol',
+        propertyName: 'Plaza Sol', 
+        description: 'Fallo en el sistema de aire acondicionado del local 12.',
+        status: 'in_progress',
+        reportedDate: '2024-07-27',
+        assignedTo: 'Climas del Caribe'
+    },
+    { 
+        id: 'REQ-003', 
+        propertyId: 'villa-zicatela',
+        propertyName: 'Villa Zicatela', 
+        description: 'Reparación de la bomba de la alberca.',
+        status: 'completed',
+        reportedDate: '2024-07-25',
+        assignedTo: 'Mantenimiento Interno'
+    },
+    { 
+        id: 'REQ-004', 
+        propertyId: 'oficinas-puerto',
+        propertyName: 'Oficinas del Puerto', 
+        description: 'Pintura exterior de la fachada norte.',
+        status: 'pending',
+        reportedDate: '2024-07-29',
+        assignedTo: 'Constructora del Golfo'
+    },
+     { 
+        id: 'REQ-005', 
+        propertyId: 'casa-playa',
+        propertyName: 'Casa Playa', 
+        description: 'Revisión del sistema eléctrico.',
+        status: 'cancelled',
+        reportedDate: '2024-07-26',
+        assignedTo: null
+    },
+];

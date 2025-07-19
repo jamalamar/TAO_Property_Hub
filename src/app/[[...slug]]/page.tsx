@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { CatalogView } from '@/components/views/catalog-view';
 import { LegalView } from '@/components/views/admin/legal-view';
 import { PropertyManagement } from '@/components/views/admin/property-management';
+import { MaintenanceView } from '@/components/views/admin/maintenance-view';
 
 export default function Page({ params, searchParams }: { params: { slug?: string[] }, searchParams: { role?: string } }) {
   const slug = params.slug || [];
@@ -42,7 +43,7 @@ export default function Page({ params, searchParams }: { params: { slug?: string
          return <PropertyManagement />;
       }
       if (second === 'maintenance') {
-        return <PlaceholderView title="Mantenimiento" />;
+        return <MaintenanceView />;
       }
     }
 
