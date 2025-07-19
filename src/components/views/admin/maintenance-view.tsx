@@ -30,6 +30,7 @@ import { useToast } from '@/hooks/use-toast';
 import { getAllProperties, maintenanceRequests as initialRequests, maintenanceStatuses } from '@/lib/data';
 import { PlusCircle, Edit } from 'lucide-react';
 import { AdminViewWrapper } from '../admin-view-wrapper';
+import { cn } from '@/lib/utils';
 
 export function MaintenanceView() {
   const { toast } = useToast();
@@ -73,7 +74,7 @@ export function MaintenanceView() {
   };
   
   const getStatusInfo = (statusId: string) => {
-    return maintenanceStatuses.find(s => s.id === statusId) || { name: 'Desconocido', color: 'bg-gray-500' };
+    return maintenanceStatuses.find(s => s.id === statusId) || { name: 'Desconocido', className: 'bg-gray-100 text-gray-800 border-gray-200' };
   }
 
   return (
@@ -163,8 +164,7 @@ export function MaintenanceView() {
                                 <TableCell className="max-w-xs truncate">{req.description}</TableCell>
                                 <TableCell>{req.reportedDate}</TableCell>
                                 <TableCell>
-                                    <Badge variant="outline" className="flex items-center gap-2">
-                                        <span className={`h-2 w-2 rounded-full ${statusInfo.color}`}></span>
+                                    <Badge variant="outline" className={cn("font-semibold", statusInfo.className)}>
                                         {statusInfo.name}
                                     </Badge>
                                 </TableCell>
