@@ -5,6 +5,7 @@ import { PlaceholderView } from '@/components/views/placeholder-view';
 import { redirect } from 'next/navigation';
 import { CatalogView } from '@/components/views/catalog-view';
 import { LegalView } from '@/components/views/admin/legal-view';
+import { PropertyManagement } from '@/components/views/admin/property-management';
 
 export default function Page({ params, searchParams }: { params: { slug?: string[] }, searchParams: { role?: string } }) {
   const slug = params.slug || [];
@@ -38,7 +39,7 @@ export default function Page({ params, searchParams }: { params: { slug?: string
         return <LegalView />;
       }
       if (second === 'administration') {
-         return <PlaceholderView title="Administración" />;
+         return <PropertyManagement />;
       }
       if (second === 'maintenance') {
         return <PlaceholderView title="Mantenimiento" />;
