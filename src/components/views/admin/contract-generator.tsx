@@ -115,11 +115,7 @@ export function ContractGenerator() {
   return (
     <div className="space-y-6">
         <Card>
-            <CardHeader>
-                <CardTitle>Generador de Contratos</CardTitle>
-                <CardDescription>Rellena los campos para generar un borrador del contrato de arrendamiento.</CardDescription>
-            </CardHeader>
-            <CardContent>
+            <CardContent className="pt-6">
                 <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <div className="grid md:grid-cols-2 gap-8">
