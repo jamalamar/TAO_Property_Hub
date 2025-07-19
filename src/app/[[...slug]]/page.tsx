@@ -2,9 +2,6 @@ import { AppLayout } from '@/components/app-layout';
 import { DashboardView } from '@/components/views/dashboard-view';
 import { PropertyView } from '@/components/views/property-view';
 import { PlaceholderView } from '@/components/views/placeholder-view';
-import { LegalView } from '@/components/views/admin/legal-view';
-import { PropertyManagement } from '@/components/views/admin/property-management';
-import { EstimatesView } from '@/components/views/admin/estimates-view';
 import { redirect } from 'next/navigation';
 import { CatalogView } from '@/components/views/catalog-view';
 
@@ -37,13 +34,13 @@ export default function Page({ params, searchParams }: { params: { slug?: string
     
     if (first === 'admin') {
       if (second === 'legal') {
-        return <LegalView />;
+        return <PlaceholderView title="Legal" />;
       }
       if (second === 'administration') {
-         return <PropertyManagement />;
+         return <PlaceholderView title="Administración" />;
       }
       if (second === 'maintenance') {
-        return <EstimatesView />;
+        return <PlaceholderView title="Mantenimiento" />;
       }
     }
 
